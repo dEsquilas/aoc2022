@@ -1,84 +1,64 @@
 import pytest
 
+
+# Part 1
+# A - X = Rock
+# B - Y = Paper
+# C - Z = Scissors
+
+# Part 2
+# X - Lose
+# Y - Draw
+# Z - Win
+
 def day_2(filename):
     lines = [l.strip() for l in open(filename)]
 
     total_score_p1 = 0
     total_score_p2 = 0
 
-    # Part 1
-    # A - X = Rock
-    # B - Y = Paper
-    # C - Z = Scissors
-    # X - A = 23
-
     for line in lines:
-        chars = line.split(" ")
+        he, me = line.split(" ")
 
-        game = 0
-        score = 0
+        tmp = me
 
-        he = ord(chars[0])
-        me = ord(chars[1]) - 23
+        he = ord(he)
+        me = ord(tmp) - (ord("X") - ord("A"))
+
 
         if he == me:
-            game = 3
+            total_score_p1 += 3
         if he > me:
-            if he - me == 1:
-                game = 0
-            else:
-                game = 6
+            if he - me != 1:
+                total_score_p1 += 6
         if he < me:
             if me - he == 1:
-                game = 6
-            else:
-                game = 0
+                total_score_p1 += 6
 
-        score = ord(chars[1]) - ord("X") + 1
-
-        total_score_p1 += game + score
+        total_score_p1 += me - ord("@")
 
 
-    # Part 2
-    # X - Lose
-    # Y - Draw
-    # Z - Win
 
-    counter = 0
 
     for line in lines:
-        chars = line.split(" ")
+        he, iShould = line.split(" ")
 
-        game = 0
-        score = 0
-
-        counter += 1
-        if counter > 3:
-            exit
-
-        he = ord(chars[0])
-
-        if chars[1] == "X":
-            game = 0
-            if chars[0] == "A":
-                score = 3
-            elif chars[0] == "B":
-                score = 1
-            elif chars[0] == "C":
-                score = 2
-        if chars[1] == "Y":
-            game = 3
-            score = ord(chars[0]) - ord("A") + 1
-        if chars[1] == "Z":
-            game = 6
-            if chars[0] == "A":
-                score = 2
-            elif chars[0] == "B":
-                score = 3
-            elif chars[0] == "C":
-                score = 1
-
-        total_score_p2 += game + score
+        if iShould == "X":
+            if he == "A":
+                total_score_p2 += 3
+            elif he == "B":
+                total_score_p2 += 1
+            elif he == "C":
+                total_score_p2 += 2
+        elif iShould == "Y":
+            total_score_p2 += ord(he) - ord("@") + 3
+        elif iShould == "Z":
+            if he == "A":
+                total_score_p2 += 8
+            elif he == "B":
+                total_score_p2 += 9
+            elif he == "C":
+                total_score_p2 += 7
 
     return total_score_p1, total_score_p2
 
