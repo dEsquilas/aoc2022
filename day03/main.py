@@ -1,27 +1,22 @@
 import pytest
 
+def score(item):
+    if item.isupper():
+        return ord(item) - ord('A') + 27
+    else:
+        return ord(item) - ord('a') + 1
+
 def day_3(filename):
     lines = [l.strip() for l in open(filename)]
-
-    total_p1 = 0
-    total_p2 = 0
+    total_p1, total_p2 = 0, 0
 
     # Part 1
     for line in lines:
-
-        item = next(iter(set(line[:len(line) // 2]) & set(line[len(line) // 2:])))
-        if item.isupper():
-            total_p1 += ord(item) - ord('A') + 27
-        else:
-            total_p1 += ord(item) - ord('a') + 1
+        total_p1 += score(next(iter(set(line[:len(line) // 2]) & set(line[len(line) // 2:]))))
 
     # Part 2
     for i in range(len(lines)//3):
-        item = next(iter(set(lines[i*3]) & set(lines[i*3+1]) & set(lines[i*3+2])))
-        if item.isupper():
-            total_p2 += ord(item) - ord('A') + 27
-        else:
-            total_p2 += ord(item) - ord('a') + 1
+        total_p2 += score(next(iter(set(lines[i*3]) & set(lines[i*3+1]) & set(lines[i*3+2]))))
 
     return total_p1, total_p2
 
