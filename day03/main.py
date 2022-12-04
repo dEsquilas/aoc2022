@@ -1,10 +1,12 @@
 import pytest
 
+
 def score(item):
     if item.isupper():
         return ord(item) - ord('A') + 27
     else:
         return ord(item) - ord('a') + 1
+
 
 def day_3(filename):
     lines = [l.strip() for l in open(filename)]
@@ -20,9 +22,9 @@ def day_3(filename):
 
     return total_p1, total_p2
 
+
 def test_day_3():
      assert day_3("test.txt") == (157, 70)
-
 
 test_day_3()
 
