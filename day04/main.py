@@ -1,5 +1,6 @@
 import pytest
 
+
 def day_4(filename):
     lines = [l.strip() for l in open(filename)]
     total_p1, total_p2 = 0, 0
@@ -15,6 +16,8 @@ def day_4(filename):
         if (p1r1 <= p2r1 and p1r2 >= p2r2) or (p2r1 <= p1r1 and p2r2 >= p1r2):
             total_p1 += 1
 
+        if (p1r1 <= p2r1 <= p1r2) or (p1r1 <= p2r2 <= p1r2) or (p2r1 <= p1r1 <= p2r2) or (p2r1 <= p1r2 <= p2r2):
+            total_p2 += 1
 
 
     return total_p1, total_p2
