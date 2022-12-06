@@ -24,7 +24,7 @@ def day_5(filename):
             if block != "   ":
                 stacks[current_block].append(block[1:2])
             current_block += 1
-            i+=4
+            i += 4
         if lines[id+2].strip() == "":
             start_on = id + 3
             break
