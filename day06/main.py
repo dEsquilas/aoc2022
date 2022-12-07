@@ -1,10 +1,10 @@
 import pytest
 
 
-def get_first_marker(input, default_offset = 4):
+def get_first_marker(data, default_offset=4):
     offset = default_offset
-    while offset < len(input):
-        current = input[offset-default_offset:offset]
+    while offset < len(data):
+        current = data[offset-default_offset:offset]
         counter = {i: current.count(i) for i in current}
         if len(counter) == default_offset:
             return offset
