@@ -35,9 +35,7 @@ def day_7(filename):
             bigger_directories.append(directories_size[directory])
 
     bigger_directories.sort()
-
     output_p2 = bigger_directories[0]
-
 
     return output_p1, output_p2
 
