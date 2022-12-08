@@ -13,14 +13,9 @@ def is_biggger_subpart(part, value):
 
 def get_score(axis, offset):
 
-    left = axis[:offset]
+    left, right = axis[:offset], axis[offset + 1:]
     left.reverse()
-    right = axis[offset + 1:]
-
-    score_p1 = get_subscore(left, axis[offset])
-    score_p2 = get_subscore(right, axis[offset])
-
-    return score_p1 * score_p2
+    return get_subscore(left, axis[offset]) * get_subscore(right, axis[offset])
 
 
 def get_subscore(axis, value):
@@ -41,17 +36,12 @@ def day_8(filename):
             if line == 0 or line == len(map) - 1 or col == 0 or col == len(row) - 1:
                 visibles += 1
             else:
-                x_axis = [int(map[line][i]) for i in range(len(map))]
-                y_axis = [int(map[i][col]) for i in range(len(map))]
+                x_axis, y_axis = [int(map[line][i]) for i in range(len(map))], [int(map[i][col]) for i in range(len(map))]
                 if is_bigger(x_axis, col) or is_bigger(y_axis, line):
                     visibles += 1
-                score = get_score(x_axis, col) * get_score(y_axis, line)
-                max_score = max(max_score, score)
+                max_score = max(max_score, get_score(x_axis, col) * get_score(y_axis, line))
 
-    output_p1 = visibles
-    output_p2 = max_score
-
-    return output_p1, output_p2
+    return visibles, max_score
 
 
 def test_day_8():
