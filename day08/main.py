@@ -4,8 +4,7 @@ def is_bigger(axis, offset):
     return is_biggger_subpart(axis[:offset], axis[offset]) or is_biggger_subpart(axis[offset + 1:], axis[offset])
 
 def is_biggger_subpart(part, value):
-    part.sort()
-    part.reverse()
+    part.sort(reverse=True)
     if part[0] < value and part.count(value) == 0:
         return True
     else:
@@ -28,8 +27,7 @@ def day_8(filename):
 
     map = [l.strip() for l in open(filename).readlines()]
 
-    visibles = 0
-    max_score = 0
+    visibles, max_score = 0, 0
 
     for line, row in enumerate(map):
         for col, item in enumerate(row):
@@ -46,6 +44,7 @@ def day_8(filename):
 
 def test_day_8():
     assert day_8("test.txt") == (21, 8)
+
 
 test_day_8()
 
