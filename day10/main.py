@@ -16,41 +16,43 @@ def day_10(filename):
             stack.append(int(cmd[1]))
 
     x = 1
-    screen = [" " for i in range(40)]
+    screen = []
+    line_screen = ["." for i in range(40)]
 
     for i in range(1, len(stack)):
 
-        tmp = stack.pop(0)
-        x += tmp
-
+        x += stack.pop(0)
         pixel_position = (i - 1) % 40
 
-        if abs(x - pixel_position) <= 1:
-            screen[pixel_position] = '#'
-
+        if -1 <= x - pixel_position <= 1:
+            line_screen[pixel_position] = '#'
 
         if i == 20 or (i >= 20 and (i - 20) % 40 == 0):
             current = i * x
             signal += current
 
-        if i % 40 == 0:
-            print(''.join(screen))
-            screen = [" " for i in range(40)]
-
         i += 1
 
+        if i % 40 == 0:
+            screen.append(line_screen)
+            line_screen = ["." for i in range(40)]
 
-    return signal, 0
+    p2 = []
+    for line_screen in screen:
+        p2.append("".join(line_screen))
+
+    return signal, p2
 
 
 def test_day_10():
-    assert day_10("test.txt") == (13140, 0)
+    assert day_10("test.txt")[0] == 13140
 
 test_day_10()
 
-print(" ")
 p1, p2 = day_10("input.txt")
 
-print(" ")
 print("Part 1:", p1)
+print("Part 2:")
+for line in p2:
+    print(line)
 
