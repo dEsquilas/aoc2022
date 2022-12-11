@@ -2,6 +2,7 @@ import pytest
 import copy
 from parse import parse
 
+
 class Monkey:
     def __init__(self, data):
         values = parse(
@@ -26,7 +27,6 @@ class Monkey:
         self.isFalse = int(values[5])
 
         self.items_inspected = 0
-
 
     def execute(self, common=False):
 
@@ -83,19 +83,17 @@ def day_11(filename):
 
     common = 1
 
-    for id, monkey in monkeys_dict.items():
+    for monkey in monkeys_dict.values():
         common *= monkey.test
 
     results = []
 
     for j in range(2):
         monkeys_dict = copy.deepcopy(tmp_monkeys_dict)
-        cycles = 20
-        if j == 1:
-            cycles = 10000;
+        cycles = 20 if j == 0 else 10000
 
-        for i in range(cycles):
-            for id, monkey in monkeys_dict.items():
+        for c in range(cycles):
+            for monkey in monkeys_dict.values():
                 for i in range(len(monkey.items)):
                     if j == 0:
                         item_to_handle, to_monkey = monkey.execute()
@@ -103,8 +101,8 @@ def day_11(filename):
                         item_to_handle, to_monkey = monkey.execute(common)
                     monkeys_dict[to_monkey].items.append(item_to_handle)
 
-        items_inspected_per_monkey= []
-        for id, monkey in monkeys_dict.items():
+        items_inspected_per_monkey = []
+        for monkey in monkeys_dict.values():
             items_inspected_per_monkey.append(monkey.items_inspected)
 
         items_inspected_per_monkey.sort(reverse=True)
@@ -121,4 +119,3 @@ p1, p2 = day_11("input.txt")
 
 print("Part 1:", p1)
 print("Part 2:", p2)
-
