@@ -38,7 +38,7 @@ def day_18(filename):
 
     external_air_blocks = []
 
-    # flood from 0, 0, 0 to 25, 25, 25
+    # flood from 0, 0, 0 to limit the number
 
     external_air_blocks = set()
     border_to_expand = set()
