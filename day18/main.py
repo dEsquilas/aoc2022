@@ -22,7 +22,6 @@ def day_18(filename):
         t = [int(x) for x in line.split(",")]
         faces.add((int(t[0]), int(t[1]), int(t[2])))
 
-
     while(len(faces) > 0):
         if len(cubes_added) == 0:
             cubes_added.add(faces.pop())
@@ -35,8 +34,6 @@ def day_18(filename):
                     faces_to_add -= 2
             cubes_added.add(current_cube)
             current_faces += faces_to_add
-
-    external_air_blocks = []
 
     # flood from 0, 0, 0 to limit the number
 
